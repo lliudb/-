@@ -1,3 +1,18 @@
 @charset "utf-8";
 
 *{margin:0;padding:0;}
+/*背景颜色表*/
+.bc-white{background-color: white;}/*白色*/
+.bc-grey{background-color: #ccc;}/*暗淡*/
+.bc-black{background-color: #333;}/*铁黑*/
+.bc-red{background-color:#f16b6b;}/*脂红*/
+.bc-blue{background-color:#2196f3;}/*宝蓝*/
+.bc-orange{background-color: #FF5722;}/*橘黄*/
+
+/*图标表*/
+
+
+
+#SME{display:block;}
+#
+#
