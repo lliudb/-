@@ -18,9 +18,9 @@
 
 	//
 	var SmeSelector = {
-		"point":{item:{"village":{val:1,bg:""},"castle":2,"altar":3,"wreckage":4}},
-		"line":{item:{"river":5,"mountRange":6}},
-		"block":{item:{"mount":7,"lake":8,"city":9,"forest":10,"stones":11}}
+		"point":{item:{"village":{val:1,bg:""},"castle":{val:2,bg:""},"altar":{val:3,bg:""},"wreckage":{val:4,bg:""}}},
+		"line":{item:{"river":{val:5,bg:""},"mountRange":{val:6,bg:""}}},
+		"block":{item:{"mount":{val:7,bg:""},"lake":{val:8,bg:""},"city":{val:9,bg:""},"forest":{val:10,bg:""},"stones":{val:11,bg:""}}}
 	}
 
 	var SME = function(content,config){
@@ -30,6 +30,7 @@
 			version:"0.1.0",
 			content_w:that.__cont.clientWidth,
 			content_h:that.__cont.clientHeight,
+			frames:config.frames,
 		};
 		//地图数据类型
 		that.mapData = {};
@@ -98,23 +99,44 @@
 				return ;
 			}
 		}
-
+		var x = 1;
  		that.init = function(){
  			that.__canvas = document.getElementById("SmeCanvas");
  			that.__context = that.__canvas.getContext("2d");
  			that.__canvas.width = that.config.content_w;
 			that.__canvas.height = that.config.content_h;
+			//加载基本的操作界面
+			//loadBasicPanel();
 
-			that.render();
+			//渲染绘图区域
+			// startRender();
  			return that;
  		}
- 
+ 		
+ 		/**
+ 		 * 开启帧刷新
+ 		 */
+ 		var startRender = function(){
+ 			that.frameRender = undefined;
+ 			that.frameRender = setInterval(function(){
+ 				that.render(that.__context);
+ 			},1000/that.config.frames);
+ 		}
+
+ 		/**
+ 		 * 关闭帧刷新
+ 		 */
+ 		var stopRender = function(){
+ 			clearInterval(that.frameRender);
+ 			console.log("已关闭帧刷新");
+ 		}
  		/**
  		 * 单帧渲染操作，根据当前
  		 */
- 		that.render = function(){
- 			var cxt = that.__context;
+ 		that.render = function(cxt){
+ 			// var cxt = that.__context;
  			//根据当前数据渲染绘制界面
+ 			console.log(x++,"次渲染");
  		}
 
 		return that;
