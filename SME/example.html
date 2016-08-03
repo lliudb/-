@@ -6,28 +6,55 @@
 <link rel="stylesheet" type="text/css"  href="sme.css" />
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="sme.js"></script>
-
-<script src="http://cdn.bootcss.com/fabric.js/1.6.3/fabric.js"></script>
+<link rel="stylesheet/less" type="text/css" href="less/sme.less" />
 </head>
 
 <body style="background: #ccc;">
   	<div id="SME">
-  		<div class="SME-CONTENT">
-  			<canvas id="SmeCanvas" height="800" width="1600" style="background: white;"></canvas>
+  		<div id="SME-CONTENT">
+  			<canvas id="SmeCanvas" style="background: white;"></canvas>
   		</div>
-  		<div class="SME-STATUS">
+      <div id="SME-PANEL">
+        <div class="SmeStatus">
+          
+        </div>
+      </div>
+  		<div id="SME-STATUS">
   			<div class="SmeStatus">
   				
   			</div>
   		</div>
-  		<div class="SME-MENU">
+  		<div id="SME-MENU">
   			<div class="SmeOptions">
-  				
+  				<div class="sme-opt-block">
+            拖动
+          </div>
+          <div class="sme-spearte"></div>
+          <ul class="sme-ul">
+            <li>
+              <div class="sme-opt-block">
+                山
+              </div>
+            </li>
+            <li>
+              <div class="sme-opt-block">
+                水
+              </div>
+            </li>
+          </ul>
+          <div class="sme-spearte"></div>
+          <div class="sme-opt-block">
+            保存
+          </div>
+          <div class="sme-spearte"></div>
+          <div class="sme-opt-block">
+            撤销
+          </div>
   			</div>
   		</div>
   	</div>
   	<script type="text/javascript">
-  		var p = SME("SME",{})
+  		var p = SME("SME",{});
   		p.init();
   	</script>
 </body>

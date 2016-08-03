@@ -13,4 +13,16 @@
 
 
 
-#SME{display:block;margin:12px;width:1800px;height:800px;}
+#SME{display:block;position: relative;margin:12px;width:1800px;height:800px;}
+#SME-MENU{position:absolute;top:12px;right:12px;box-shadow:1px 1px 4px rgba(20,20,20,1);width:68px;border-radius:2px;border: 4px #999 double;}
+#SmeCanvas{border-radius:4px;}
+
+
+
+#SME-MENU .sme-opt-block{display: block;padding:8px 4px;text-align: center;cursor:pointer;}
+#SME-MENU .sme-opt-block:hover{background:#f16b6b;}
+#SME-MENU .sme-spearte{background:#333;height:12px;}
+#SME-MENU .sme-ul{list-style: none;}
+
+#SME-MENU .sme-ul .
+
