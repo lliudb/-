@@ -179,7 +179,7 @@
  		/**
  		 * 将位置调整到指定的位置，并重新排序
  		 */
- 		var relistIndex = function(idx,now){}
+ 		var relistIndex = function(idx){}
 
 		return that;
 	}
