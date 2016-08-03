@@ -99,7 +99,7 @@
 				return ;
 			}
 		}
-		var x = 1;
+
  		that.init = function(){
  			that.__canvas = document.getElementById("SmeCanvas");
  			that.__context = that.__canvas.getContext("2d");
@@ -130,14 +130,29 @@
  			clearInterval(that.frameRender);
  			console.log("已关闭帧刷新");
  		}
+
  		/**
  		 * 单帧渲染操作，根据当前
  		 */
  		that.render = function(cxt){
  			// var cxt = that.__context;
  			//根据当前数据渲染绘制界面
- 			console.log(x++,"次渲染");
  		}
+
+ 		/**
+ 		 * 绘制点类型区域
+ 		 */
+ 		var drawPointLandForms = function(obj){}
+
+ 		/**
+ 		 * 绘制线型类型区域
+ 		 */
+ 		var drawLineLandForms = function(obj){}
+
+ 		/**
+ 		 * 绘制块类型区域
+ 		 */
+ 		var drawBlockLandForms = function(obj){}
 
 		return that;
 	}
