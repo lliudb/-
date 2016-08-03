@@ -16,10 +16,11 @@
 		"STAY":{desc:"停留",val:7},
 	}
 
+	//
 	var SmeSelector = {
-		"point":{val:["village","castle","altar","wreckage"]},
-		"line":{val:["river","mountRange"]},
-		"block":{val:["mount","lake","city","forest","stones"]}
+		"point":{item:{"village":{val:1,bg:""},"castle":2,"altar":3,"wreckage":4}},
+		"line":{item:{"river":5,"mountRange":6}},
+		"block":{item:{"mount":7,"lake":8,"city":9,"forest":10,"stones":11}}
 	}
 
 	var SME = function(content,config){
