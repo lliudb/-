@@ -16,11 +16,11 @@
 		"STAY":{desc:"停留",val:7},
 	}
 
-	//
+	//选择器数据
 	var SmeSelector = {
-		"point":{item:{"village":{val:1,bg:""},"castle":{val:2,bg:""},"altar":{val:3,bg:""},"wreckage":{val:4,bg:""}}},
-		"line":{item:{"river":{val:5,bg:""},"mountRange":{val:6,bg:""}}},
-		"block":{item:{"mount":{val:7,bg:""},"lake":{val:8,bg:""},"city":{val:9,bg:""},"forest":{val:10,bg:""},"stones":{val:11,bg:""}}}
+		"point":{item:{"village":{type:1,bg:""},"castle":{type:2,bg:""},"altar":{type:3,bg:""},"wreckage":{type:4,bg:""}}},
+		"line":{item:{"river":{type:5,bg:""},"mountRange":{type:6,bg:""}}},
+		"block":{item:{"mount":{type:7,bg:""},"lake":{type:8,bg:""},"city":{type:9,bg:""},"forest":{type:10,bg:""},"stones":{type:11,bg:""}}}
 	}
 
 	var SME = function(content,config){
@@ -33,14 +33,15 @@
 			frames:config.frames,
 		};
 		//地图数据类型
-		that.mapData = {};
+		that.mapData = [];
 		//块状区域
-		var regionLandforms = function(name,type,conf){
+		var addBlockLandforms = function(name,type,conf){
 			var o = {
 				zindex:that.mapData.length,
 				name:name,
 				type:type,
 				points:[[0,2],[2,3],[3,5]],
+				shape:"block",
 			}
 			if(type == "mount"){//山类型 
 			
@@ -58,13 +59,14 @@
 		}
 
 		//点状区域
-		var pointLandForms = function(name,type,conf){
+		var addPointLandForms = function(name,type,conf){
 	 		var o = {
 				zindex:that.mapData.length,
 				name:name,
 				type:type,
 				center:{x:2,y:3},
 				radius:12,
+				shape:"point",
 			} 
 	 		if(type=="village"){//村庄类型
 
@@ -82,7 +84,7 @@
 		/**
 		 * 生成线状区域对象
 		 */
-		var lineLandForms = function(name,type,conf){
+		var addLineLandForms = function(name,type,conf){
 	 		var o = {
 				zindex:that.mapData.length,
 				name:name,
@@ -90,6 +92,7 @@
 				start:{x:9,y:0},
 				end:{x:0,y:0},
 				points:[[0,2],[2,3],[3,5]],
+				shape:"line",
 			} 
 	 		if(type=="river"){//长河类型
 
@@ -137,6 +140,15 @@
  		that.render = function(cxt){
  			// var cxt = that.__context;
  			//根据当前数据渲染绘制界面
+ 			for(data in that.mapData){
+ 				if(data.shape == "point"){
+ 					drawPointLandForms(data);
+ 				}else if(data.shape == "line"){
+ 					drawLineLandForms(data);
+ 				}else if(data.shape == "block"){
+ 					drawBlockLandForms(data);
+ 				}
+ 			}
  		}
 
  		/**
@@ -153,6 +165,21 @@
  		 * 绘制块类型区域
  		 */
  		var drawBlockLandForms = function(obj){}
+ 
+ 		/**
+ 		 * 调节缩放尺寸
+ 		 */
+ 		var sacleCanvas = function(cxt,size){}
+
+ 		/**
+ 		 * 重置画布尺寸
+ 		 */
+ 		var resizeCanvas = function(w,h){}
+
+ 		/**
+ 		 * 将位置调整到指定的位置，并重新排序
+ 		 */
+ 		var relistIndex = function(idx,now){}
 
 		return that;
 	}
