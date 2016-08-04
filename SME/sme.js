@@ -113,6 +113,7 @@
 
 			//渲染绘图区域
 			// startRender();
+			LoadEvent();
  			return that;
  		}
  		
@@ -181,6 +182,14 @@
  		 */
  		var relistIndex = function(idx){}
 
+        
+        
+        var LoadEvent = function(){
+        	that.__canvas.addEventListener('click',function(eve){
+        		console.log("test");
+        	},false);
+        }
+        
 		return that;
 	}
 
