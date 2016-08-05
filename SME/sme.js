@@ -7,11 +7,12 @@
 
 	//状态表
 	var STATUS = {
-		"DRAWING":{desc:"绘制中...",val:1,},
-		"EDITING":{desc:"编辑中...",val:2},
-		"SAVING":{desc:"正在保存...",val:3,},
-		"SELECTING":{desc:"正在选择...",val:4},
-		"IDLE":{desc:"无操作",val:0},
+		"CURR_STATUS":{desc:"无操作",k:"IDLE",v:0},
+		"DRAWING":{desc:"绘制中...",v:1,k:"DRAWING"},
+		"EDITING":{desc:"编辑中...",v:2,k:"EDITING"},
+		"SAVING":{desc:"正在保存...",v:3,k:"SAVING"},
+		"SELECTING":{desc:"正在选择...",v:4,k:"SELECTING"},
+		"IDLE":{desc:"无操作",v:0,k:"IDLE"},
 	}
 
 	//选择器数据
@@ -111,7 +112,7 @@
 
 			//渲染绘图区域
 			// startRender();
-			LoadEvent();
+			// LoadEvent();
  			return that;
  		}
  		
@@ -180,12 +181,35 @@
  		 */
  		var relistIndex = function(idx){}
 
-        
-        
-        var LoadEvent = function(){
-        	that.__canvas.addEventListener('click',function(eve){
-        		console.log("test");
-        	},false);
+        /**
+         * 参数 will指跳转状态码或字段,turn不传默认跳转
+         * 状态切换检查,状态切换允许则默认不跳转
+         * 返回检查结果true/false
+         */
+        var changeCurrStatus2Next = function(will,turn){
+        	var flag = false , willName = "";
+        	turn = turn==null?true:false;
+        	switch(STATUS.CURR_STATUS.k) {
+        		case "IDLE":
+        			if(will == STATUS["SELECTING"].v || will == STATUS["SELECTING"].k ){
+        				willName = "SELECTING" , flag = true;
+        			}else if(will == STATUS["DRAWING"].v || will == STATUS["DRAWING"].k ){
+        				willName = "DRAWING" , flag = true;
+        			}
+        			break;
+        		case "DRAWING":
+        			break;
+        		case "EDITING":
+        			break;
+        		case "SAVING":
+        			break;
+        		case "SELECTING":
+        			break;
+        	}
+        	if(flag && turn){//如果跳转成功，则
+        		STATUS["CURR_STATUS"] = STATUS[willName];
+        	}
+        	return flag;
         }
         
 		return that;
