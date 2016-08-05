@@ -109,10 +109,10 @@
 			that.__canvas.height = that.config.content_h;
 			//加载基本的操作界面
 			//loadBasicPanel();
-
 			//渲染绘图区域
-			// startRender();
-			// LoadEvent();
+			//startRender();
+			//加载驱动事件
+			//loadEventDrivers();
  			return that;
  		}
  		
@@ -122,7 +122,7 @@
  		var startRender = function(){
  			that.frameRender = undefined;
  			that.frameRender = setInterval(function(){
- 				that.render(that.__context);
+ 				that.render();
  			},1000/that.config.frames);
  		}
 
@@ -135,9 +135,19 @@
  		}
 
  		/**
- 		 * 单帧渲染操作，根据当前
+ 		 * 清空画布方法
+ 		 */
+ 		var clearCanvas = function(){
+ 			that.__context.clearRect(0,0,that.__canvas.width,that.__canvas.height);
+ 		}
+
+ 		/**
+ 		 * 单帧渲染地图原件
  		 */
  		that.render = function(){
+ 			//清空当前画布内容
+ 			clearCanvas();
+
  			//根据当前数据渲染绘制界面
  			for(data in that.mapData){
  				if(data.shape == "point"){
@@ -178,7 +188,18 @@
  		/**
  		 * 将位置调整到指定的位置，并重新排序
  		 */
- 		var relistIndex = function(idx){}
+ 		var relistIndex = function(idx,oidx){
+ 			var new_idx = that.mapData[idx].zindex;
+ 			for(var i = idx ; i < that.mapData.length; i++){
+ 				that.mapData[i].zindex++;
+ 			}
+ 			//将当前zindex设置成
+ 			that.mapData[oidx].zindex = new_idx;
+ 			//对当前数据进行排序
+ 			that.mapData.sort(function(a,b){
+ 				return a.zindex > b.zindex;
+ 			});
+ 		}
 
         /**
          * 参数 will指跳转状态码或字段,turn不传默认跳转
@@ -211,6 +232,40 @@
         	return flag;
         }
         
+
+        /**
+         * 根据当前状态加载不同界面
+         */
+        var loadStatusPanel = function(){
+        	switch(STATUS.CURR_STATUS.k) {
+        		case "IDLE":
+        			// doNothing();
+        			break;
+        		case "DRAWING":
+        			// doDraw();
+        			break;
+        		case "EDITING":
+        			// doEdit();
+        			break;
+        		case "SAVING":
+        			// doSave();
+        			break;
+        		case "SELECTING":
+        			// doSelect();
+        			break;
+        	}
+        }
+
+
+
+
+
+
+
+
+
+
+        //返回上下文信息
 		return that;
 	}
 
