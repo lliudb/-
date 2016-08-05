@@ -10,10 +10,8 @@
 		"DRAWING":{desc:"绘制中...",val:1,},
 		"EDITING":{desc:"编辑中...",val:2},
 		"SAVING":{desc:"正在保存...",val:3,},
-		"SUCES":{desc:"成功",val:4},
-		"ERROR":{desc:"错误",val:5},
-		"WAIT":{desc:"等待",val:6},
-		"STAY":{desc:"停留",val:7},
+		"SELECTING":{desc:"正在选择...",val:4},
+		"IDLE":{desc:"无操作",val:0},
 	}
 
 	//选择器数据
