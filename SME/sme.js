@@ -1,8 +1,20 @@
 ;(function($WIN,$){
 
 	var getMousePos = function(e){
+		if (!e) e = window.event;  
+	    if (e.pageX || e.pageY) {  
+	        return { x: e.pageX, y: e.pageY };  
+	    }  
+	    return {  
+	        x: e.clientX + document.documentElement.scrollLeft - document.body.clientLeft,  
+	        y: e.clientY + document.documentElement.scrollTop - document.body.clientTop  
+	    };  
+	}
 
-		return {x:1,y:2};
+	var SME_TEMPLATE = {
+		"EIDTER":{
+			"village":"<div></div>",
+		},
 	}
 
 	//状态表
@@ -255,13 +267,6 @@
         			break;
         	}
         }
-
-
-
-
-
-
-
 
 
 
