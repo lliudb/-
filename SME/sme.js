@@ -137,8 +137,7 @@
  		/**
  		 * 单帧渲染操作，根据当前
  		 */
- 		that.render = function(cxt){
- 			// var cxt = that.__context;
+ 		that.render = function(){
  			//根据当前数据渲染绘制界面
  			for(data in that.mapData){
  				if(data.shape == "point"){
