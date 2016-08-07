@@ -1,15 +1,5 @@
 ;(function($WIN,$){
 
-	var getMousePos = function(e){
-		if (!e) e = window.event;  
-	    if (e.pageX || e.pageY) {  
-	        return { x: e.pageX, y: e.pageY };  
-	    }  
-	    return {  
-	        x: e.clientX + document.documentElement.scrollLeft - document.body.clientLeft,  
-	        y: e.clientY + document.documentElement.scrollTop - document.body.clientTop  
-	    };  
-	}
 
 	var SME_TEMPLATE = {
 		"EIDTER":{
@@ -42,6 +32,8 @@
 			content_w:that.__cont.clientWidth,
 			content_h:that.__cont.clientHeight,
 			frames:config.frames,
+			offsetLeft:0,
+			offsetTop:0,
 		};
 		//地图数据类型
 		that.mapData = [];
@@ -124,7 +116,7 @@
 			//渲染绘图区域
 			//startRender();
 			//加载驱动事件
-			//loadEventDrivers();
+			loadEventDrivers();
  			return that;
  		}
  		
@@ -238,13 +230,12 @@
         		case "SELECTING":
         			break;
         	}
-        	if(flag && turn){//如果跳转成功，则
+        	if(flag && turn){//如果判定成功则转换当前状态
         		STATUS["CURR_STATUS"] = STATUS[willName];
         	}
         	return flag;
         }
         
-
         /**
          * 根据当前状态加载不同界面
          */
@@ -269,6 +260,58 @@
         }
 
 
+        var loadEventDrivers = function(){
+        	that.__canvas.addEventListener("mousemove",function(ev){
+        		var pos = getMousePos(ev);
+        		var offset = getElementOffset(that.__canvas);
+        		// console.log(pos.x-offset.x,pos.y-offset.y);
+        	});
+			that.__canvas.addEventListener("click",function(ev){
+
+        	})
+        	that.__canvas.addEventListener("click",function(ev){
+
+        	})
+        }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///                                      以下为辅助函数
+///
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/**
+		 * 获取鼠标相对于当前画布的位置
+		 * @return {x,y}
+		 */
+		var getMousePos = function(event){
+		    var e = event || window.event;
+	        var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+	        var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+		    return {  
+		        x:e.pageX || e.clientX + scrollX,  
+		        y:e.pageY || e.clientY + scrollY
+		    };  
+		}
+		/**
+		 * 获取元素相距文档最左/最顶部距离
+		 */
+		var getElementOffset = function(element){
+	　　　　var actualLeft = element.offsetLeft;
+	　　　　var actualTop = element.offsetTop;
+	　　　　var current = element.offsetParent;
+	　　　　while (current !== null){
+	　　　　　　actualLeft += current.offsetLeft;
+	　　　　　　actualTop += current.offsetTop;
+	　　　　　　current = current.offsetParent;
+	　　　　}
+	　　　　return {x:actualLeft,y:actualTop};
+　　　　}
 
         //返回上下文信息
 		return that;

@@ -14,15 +14,16 @@
 
 
 #SME{display:block;position: relative;margin:12px;width:1800px;height:800px;}
-#SME-MENU{position:absolute;top:12px;right:12px;box-shadow:1px 1px 4px rgba(20,20,20,1);width:68px;border-radius:2px;border: 4px #999 double;}
+#SME-MENU{display:inline-block;min-width:600px;border-radius:2px;border:1px #999 solid;}
 #SmeCanvas{border-radius:4px;}
 
+#SME-MENU .SmeOptions{display: flex;}
 
 
-#SME-MENU .sme-opt-block{display: block;padding:8px 4px;text-align: center;cursor:pointer;}
+#SME-MENU .sme-opt-block{display:block;position:relative;float: left;width:48px;padding:8px 4px;text-align: center;cursor:pointer;}
 #SME-MENU .sme-opt-block:hover{background:#f16b6b;}
-#SME-MENU .sme-spearte{background:#333;height:12px;}
-#SME-MENU .sme-ul{list-style: none;}
-
-#SME-MENU .sme-ul
+#SME-MENU .sme-spearte{float:left;width:10px;}
+#SME-MENU .sme-ul{list-style: none;position:absolute;display:none;width:200px;}
+#SME-MENU .sme-opt-block:hover .sme-ul{display:block;}
+#SME-MENU .sme-ul li{float:left;width:48px;}
 

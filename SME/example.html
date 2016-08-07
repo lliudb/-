@@ -11,7 +11,33 @@
 
 <body style="background: #ccc;">
   	<div id="SME">
-  		<div id="SME-CONTENT">
+  		<div id="SME-MENU" class="bc-black">
+        <div class="SmeOptions">
+          <div class="sme-opt-block">
+            <div class="opt-class">
+              点
+            </div>
+            <ul class="sme-ul">
+              <li>
+                <div class="sme-opt-ele"  data-opt='pointer'>
+                  堡
+                </div>
+              </li>
+              <li>
+                <div class="sme-opt-ele"  data-opt='pointer'>
+                  洞
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="sme-spearte"></div>
+          <div class="sme-spearte"></div>
+          <div class="sme-opt-block">
+
+          </div>
+        </div>
+      </div>
+      <div id="SME-CONTENT">
   			<canvas id="SmeCanvas" style="background: white;"></canvas>
   		</div>
       <div id="SME-PANEL">
@@ -27,34 +53,7 @@
           </div>
   			</div>
   		</div>
-  		<div id="SME-MENU">
-  			<div class="SmeOptions">
-  				<div class="sme-opt-block">
-            拖动
-          </div>
-          <div class="sme-spearte"></div>
-          <ul class="sme-ul">
-            <li>
-              <div class="sme-opt-block">
-                山
-              </div>
-            </li>
-            <li>
-              <div class="sme-opt-block">
-                水
-              </div>
-            </li>
-          </ul>
-          <div class="sme-spearte"></div>
-          <div class="sme-opt-block">
-            保存
-          </div>
-          <div class="sme-spearte"></div>
-          <div class="sme-opt-block">
-            撤销
-          </div>
-  			</div>
-  		</div>
+  		
   	</div>
   	<script type="text/javascript">
   		var p = SME("SME",{});
