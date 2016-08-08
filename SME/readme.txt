@@ -24,6 +24,7 @@
 	SAVING:
 	SELECTING:
 	EDITING:
+	MOVING:
 
 
 功能交互列表：

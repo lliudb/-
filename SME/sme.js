@@ -7,14 +7,20 @@
 		},
 	}
 
+	// "-webkit-grab","-webkit-grabbing" 抓取
+	// "-webkit-zoom-in","-webkit-zoom-out" 缩放
+	// "all-scroll" "move"位移
+	// "no-drop" "not-allowed" 禁止
+	// "pointer" "progress" "wait" 指示
+
 	//状态表
 	var STATUS = {
-		"CURR_STATUS":{desc:"无操作",k:"IDLE",v:0},
+		"CURR_STATUS":{desc:"无操作",k:"DRAWING",v:0},
 		"DRAWING":{desc:"绘制中...",v:1,k:"DRAWING"},
 		"EDITING":{desc:"编辑中...",v:2,k:"EDITING"},
 		"SAVING":{desc:"正在保存...",v:3,k:"SAVING"},
-		"SELECTING":{desc:"正在选择...",v:4,k:"SELECTING"},
-		"MOVING":{desc:"画布移动中...",v:5,k:"MOVING"},
+		"SELECTING":{desc:"正在选择...",v:4,k:"SELECTING",cursor:"move"},
+		"MOVING":{desc:"画布移动中...",v:5,k:"MOVING",cursor:"move"},
 		"IDLE":{desc:"无操作",v:0,k:"IDLE"},
 	}
 
@@ -32,7 +38,7 @@
 			version:"0.1.0",
 			content_w:that.__cont.clientWidth,
 			content_h:that.__cont.clientHeight,
-			frames:config.frames,
+			frames:config.frames|| 60,
 			offsetLeft:0,//当前画布对容器最左相对偏移量
 			offsetTop:0,//当前画布对容器最顶相对偏移量
 			canvas_w:config.can_w || 1200,
@@ -120,7 +126,7 @@
 			//加载基本的操作界面
 			//loadBasicPanel();
 			//渲染绘图区域
-			//startRender();
+			// startRender();
 			//加载驱动事件
 			loadEventDrivers();
  			return that;
@@ -148,7 +154,7 @@
  		 * 清空画布方法
  		 */
  		var clearCanvas = function(){
- 			that.__context.clearRect(0,0,that.__canvas.width,that.__canvas.height);
+ 			that.__context.clearRect(0,0,that.config.canvas_w,that.config.canvas_h);
  		}
 
  		/**
@@ -228,12 +234,23 @@
         			}
         			break;
         		case "DRAWING":
+        			if(will == STATUS["EDITING"].v || will == STATUS["EDITING"].k ){
+        				willName = "EDITING" , flag = true;
+        			}else if(will == STATUS["SAVING"].v || will == STATUS["SAVING"].k ){
+        				willName = "SAVING" , flag = true;
+        			}
         			break;
         		case "EDITING":
-        			break;
-        		case "SAVING":
+        			if(will == STATUS["SAVING"].v || will == STATUS["SAVING"].k ){
+        				willName = "SAVING" , flag = true;
+        			}
         			break;
         		case "SELECTING":
+        			if(will == STATUS["EDITING"].v || will == STATUS["EDITING"].k ){
+        				willName = "EDITING" , flag = true;
+        			}else if(will == STATUS["SAVING"].v || will == STATUS["SAVING"].k ){
+        				willName = "SAVING" , flag = true;
+        			}
         			break;
         		case "MOVING":
         	}
@@ -243,28 +260,43 @@
         	return flag;
         }
         
+
+        /**
+         * 绘制编辑点
+         */
+        var drawEditPoint = function(x,y,r){
+        	that.__context.beginPath();
+			that.__context.arc(x, y, r,0, Math.PI * 2, true);
+			that.__context.closePath();
+			that.__context.fillStyle = 'rgba(255, 0, 0, 0.25)';
+			that.__context.fill();
+        }
+
         /**
          * 根据当前状态加载不同界面
          */
-        var loadStatusPanel = function(){
-        	switch(STATUS.CURR_STATUS.k) {
-        		case "IDLE":
-        			// doNothing();
-        			break;
-        		case "DRAWING":
-        			// doDraw();
-        			break;
-        		case "EDITING":
-        			// doEdit();
-        			break;
-        		case "SAVING":
-        			// doSave();
-        			break;
-        		case "SELECTING":
-        			// doSelect();
-        			break;
-        		case "MOVING":
-        			// doMove();
+        var doSomethingOnSomeStatus = function(eve){
+    		var pos = getMousePos(eve);
+    		var offset = getElementOffset(that.__canvas);
+    		var currStatus = STATUS.CURR_STATUS.k;
+    		// console.log(pos.x-offset.x,pos.y-offset.y);
+        	if(eve.type == "mousemove"){
+        		if(STATUS.CURR_STATUS.k == "DRAWING"){
+        			
+        		}else if(STATUS.CURR_STATUS.k == "MOVING"){
+
+        		}else if(STATUS.CURR_STATUS.k == "SELECTING"){
+
+        		}
+        	}else if(eve.type == "click"){
+        		if(STATUS.CURR_STATUS.k == 'SELECTING'){
+        			//检索当前是否有选中的图形，有的话就找到该图形进行编辑
+        		}else if(STATUS.CURR_STATUS.k == 'DRAWING'){
+        			//检查当前是否存在正在绘制的图形，无生成图形，有继续添加一个点,当点到最开始的点时结束
+        			drawEditPoint(pos.x-offset.x,pos.y-offset.y,4);
+        		}
+        	}else if(eve.type == "dblClick"){
+        		//暂无使用
         	}
         }
 
@@ -275,17 +307,15 @@
         var loadEventDrivers = function(){
         	//画布鼠标移动时间
         	that.__canvas.addEventListener("mousemove",function(ev){
-        		var pos = getMousePos(ev);
-        		var offset = getElementOffset(that.__canvas);
-        		//console.log(pos.x-offset.x,pos.y-offset.y);
+        		doSomethingOnSomeStatus(ev);
         	});
         	//画布鼠标点击事件
 			that.__canvas.addEventListener("click",function(ev){
-
+				doSomethingOnSomeStatus(ev);
         	});
         	//画布鼠标双击事件
         	that.__canvas.addEventListener("dblClick",function(ev){
-
+				doSomethingOnSomeStatus(ev);
         	});
         	//画布鼠标按下事件MouseDown
         	//MouseUp

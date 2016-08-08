@@ -15,6 +15,7 @@
 
 #SME{display:block;position: relative;margin:12px;width:1800px;height:800px;}
 #SME-MENU{display:inline-block;min-width:600px;border-radius:2px;border:1px #999 solid;}
+#SME-CONTENT{position: relative;}
 #SmeCanvas{border-radius:4px;}
 
 #SME-MENU .SmeOptions{display: flex;}
@@ -22,6 +23,7 @@
 
 #SME-MENU .sme-opt-block{display:block;position:relative;float: left;width:48px;padding:8px 4px;text-align: center;cursor:pointer;}
 #SME-MENU .sme-opt-block:hover{background:#f16b6b;}
+#SME-MENU .sme-opt-block.active{background:#f16b6b;}
 #SME-MENU .sme-spearte{float:left;width:10px;}
 #SME-MENU .sme-ul{list-style: none;position:absolute;display:none;width:200px;}
 #SME-MENU .sme-opt-block:hover .sme-ul{display:block;}
