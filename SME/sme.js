@@ -268,23 +268,69 @@
         	}
         }
 
-
+        /**
+         * 事件和状态混驱动
+         * @return null
+         */
         var loadEventDrivers = function(){
+        	//画布鼠标移动时间
         	that.__canvas.addEventListener("mousemove",function(ev){
         		var pos = getMousePos(ev);
         		var offset = getElementOffset(that.__canvas);
-        		// console.log(pos.x-offset.x,pos.y-offset.y);
+        		//console.log(pos.x-offset.x,pos.y-offset.y);
         	});
+        	//画布鼠标点击事件
 			that.__canvas.addEventListener("click",function(ev){
 
-        	})
-        	that.__canvas.addEventListener("click",function(ev){
+        	});
+        	//画布鼠标双击事件
+        	that.__canvas.addEventListener("dblClick",function(ev){
 
-        	})
+        	});
+        	//画布鼠标按下事件MouseDown
+        	//MouseUp
         }
 
 
 
+
+//////////////////////////////////////////////////////////////////////////////////////////
+///
+///                              *****以下为接口方法*****
+///                                      
+//////////////////////////////////////////////////////////////////////////////////////////
+
+		/**
+		 * 保存成图片
+		 * @param  待定
+		 * @return base64的图片,地图数据，uri资源定位
+		 */
+		that.saveAsImg = function(type){
+			return {img:'',data:that.mapData,uri:''};
+		}
+
+		/**
+		 * 设置地图数据
+		 * @param {[type]} data [description]
+		 */
+		that.setMapData = function(data,idx) {
+			if(idx){
+				that.mapData[idx] = data;
+			}else{
+				that.mapData = data;
+			}
+		}
+
+		/**
+		 * 获取地图数据
+		 * @return {[type]} [description]
+		 */
+		that.getMapData = function(idx){
+			if (idx) {
+				return that.mapData[idx];
+			}
+			return that.mapData;
+		}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ///
