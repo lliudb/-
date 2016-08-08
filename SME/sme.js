@@ -14,6 +14,7 @@
 		"EDITING":{desc:"编辑中...",v:2,k:"EDITING"},
 		"SAVING":{desc:"正在保存...",v:3,k:"SAVING"},
 		"SELECTING":{desc:"正在选择...",v:4,k:"SELECTING"},
+		"MOVING":{desc:"画布移动中...",v:5,k:"MOVING"},
 		"IDLE":{desc:"无操作",v:0,k:"IDLE"},
 	}
 
@@ -32,8 +33,10 @@
 			content_w:that.__cont.clientWidth,
 			content_h:that.__cont.clientHeight,
 			frames:config.frames,
-			offsetLeft:0,
-			offsetTop:0,
+			offsetLeft:0,//当前画布对容器最左相对偏移量
+			offsetTop:0,//当前画布对容器最顶相对偏移量
+			canvas_w:config.can_w || 1200,
+			canvas_h:config.can_h || 600,
 		};
 		//地图数据类型
 		that.mapData = [];
@@ -106,11 +109,14 @@
 			}
 		}
 
+		/**
+		 * 初始化所有组件信息
+		 */ 
  		that.init = function(){
  			that.__canvas = document.getElementById("SmeCanvas");
  			that.__context = that.__canvas.getContext("2d");
- 			that.__canvas.width = that.config.content_w;
-			that.__canvas.height = that.config.content_h;
+ 			that.__canvas.width = that.config.canvas_w;
+			that.__canvas.height = that.config.canvas_h;
 			//加载基本的操作界面
 			//loadBasicPanel();
 			//渲染绘图区域
@@ -229,6 +235,7 @@
         			break;
         		case "SELECTING":
         			break;
+        		case "MOVING":
         	}
         	if(flag && turn){//如果判定成功则转换当前状态
         		STATUS["CURR_STATUS"] = STATUS[willName];
@@ -256,6 +263,8 @@
         		case "SELECTING":
         			// doSelect();
         			break;
+        		case "MOVING":
+        			// doMove();
         	}
         }
 
@@ -277,13 +286,11 @@
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 ///
-///
-///                                      以下为辅助函数
-///
-///
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+///                              *****以下为辅助函数*****
+///                                      
+//////////////////////////////////////////////////////////////////////////////////////////
 
 		/**
 		 * 获取鼠标相对于当前画布的位置

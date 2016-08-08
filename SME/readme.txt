@@ -10,8 +10,10 @@
 	EDITING状态下，提示保存/取消，然后回到IDLE状态
 	绘制：
 		IDLE => DRAWING => EDITING => SAVING
-	选择并编辑
+	选择并编辑：
 		IDLE => SELECTING => EDITING => SAVING
+	移动画布：
+		IDLE => MOVING
 	中断:
 		1、SELECTING => IDLE(主动取消状态)
 		2、DRAWING => IDLE(前置SAVING操作)
