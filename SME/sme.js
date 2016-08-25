@@ -39,8 +39,8 @@
 			content_w:that.__cont.clientWidth,
 			content_h:that.__cont.clientHeight,
 			frames:config.frames|| 60,
-			offsetLeft:0,//当前画布对容器最左相对偏移量
-			offsetTop:0,//当前画布对容器最顶相对偏移量
+			offsetLeft:-150,//当前画布对容器最左相对偏移量
+			offsetTop:-20,//当前画布对容器最顶相对偏移量
 			canvas_w:config.can_w || 1200,
 			canvas_h:config.can_h || 600,
 		};
@@ -123,6 +123,8 @@
  			that.__context = that.__canvas.getContext("2d");
  			that.__canvas.width = that.config.canvas_w;
 			that.__canvas.height = that.config.canvas_h;
+			that.__canvas.style.left = that.config.offsetLeft+"px";
+			that.__canvas.style.top = that.config.offsetTop+"px";
 			//加载基本的操作界面
 			//loadBasicPanel();
 			//渲染绘图区域
@@ -268,7 +270,7 @@
         	that.__context.beginPath();
 			that.__context.arc(x, y, r,0, Math.PI * 2, true);
 			that.__context.closePath();
-			that.__context.fillStyle = 'rgba(255, 0, 0, 0.25)';
+			that.__context.fillStyle = 'rgba(255, 0, 0, 0.45)';
 			that.__context.fill();
         }
 
