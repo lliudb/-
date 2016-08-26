@@ -6,14 +6,7 @@
 			"village":"<div></div>",
 		},
 	}
-
-	// "-webkit-grab","-webkit-grabbing" 抓取
-	// "-webkit-zoom-in","-webkit-zoom-out" 缩放
-	// "all-scroll" "move"位移
-	// "no-drop" "not-allowed" 禁止
-	// "pointer" "progress" "wait" 指示
-
-	//状态表
+	
 	var STATUS = {
 		"CURR_STATUS":{desc:"无操作",k:"DRAWING",v:0},
 		"DRAWING":{desc:"绘制中...",v:1,k:"DRAWING"},
