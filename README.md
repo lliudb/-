@@ -1,25 +1,25 @@
 # -
 ##常用代码目录
 
-#js
+	#js
 	canvas插件模板.js
 	
-#css
+	#css
 
-#php
+	#php
 
-#python
+	#python
 
 
 ##常用工具目录
 
-#js
-	jquery.min.js -v1.11.1
+	#js
+		jquery.min.js -v1.11.1
 
 
 
-#css
+	#css
 
-#php
+	#php
 
-#python
+	#python
