@@ -88,3 +88,39 @@ Date.prototype.format=function(fmt) {
     }         
     return fmt;         
 }
+
+
+
+    var arr={'31536000':'年','2592000':'个月','604800':'周','86400':'天','3600':'小时','60':'分钟','1':'秒'};
+    for (prop in obj) {
+           console.log(obj[prop],prop);
+    }
+
+/**
+ * JS版格式化时间位移量
+ * 例如： 刚刚|24分钟前|1小时前|一天前
+ */
+Date.prototype.getOffset2Now = function(now){
+    var diff=Date.parse(new Date()) - now;
+    var obj={
+            0:{t:'31536000',d:'年'},
+            1:{t:'2592000',d:'个月'},
+            2:{t:'604800',d:'周'},
+            3:{t:'86400',d:'天'},
+            4:{t:'3600',d:'小时'},
+            5:{t:'60',d:'分钟'},
+            6:{t:'1',d:'秒'}
+        };
+    console.log(diff);
+    for (prop in obj) {
+        var count = Math.floor(diff/parseInt(obj[prop]['t']));
+        console.log(count,prop,obj[prop],obj[prop]['d']);
+        if (0 != count) {
+            if(obj[prop]['d'] == '秒'){
+                return '刚刚';
+            }
+            console.log(count,prop,obj[prop],obj[prop]['d']);
+            return count+obj[prop]['d']+'前';
+        }
+    }
+}
