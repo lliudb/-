@@ -5,7 +5,7 @@
 class UtilTool{
 	
 	/**
-	 * 作品 时间格式
+	 * 时间格式
 	 */
 	static public function format_date($time){
 		$t=time()-$time;

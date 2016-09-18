@@ -90,12 +90,6 @@ Date.prototype.format=function(fmt) {
 }
 
 
-
-    var arr={'31536000':'年','2592000':'个月','604800':'周','86400':'天','3600':'小时','60':'分钟','1':'秒'};
-    for (prop in obj) {
-           console.log(obj[prop],prop);
-    }
-
 /**
  * JS版格式化时间位移量
  * 例如： 刚刚|24分钟前|1小时前|一天前
