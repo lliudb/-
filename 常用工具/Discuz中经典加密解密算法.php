@@ -1,3 +1,4 @@
+<?php
 /**
  * Discuz中经典加密解密算法
  * @param  string  $string    明文或者密文
