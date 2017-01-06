@@ -10,13 +10,13 @@ class UtilTool{
 	static public function format_date($time){
 		$t=time()-$time;
 		$f=array(
-				'31536000'=>'年',
-				'2592000'=>'个月',
-				'604800'=>'周',
-				'86400'=>'天',
-				'3600'=>'小时',
-				'60'=>'分钟',
-				'1'=>'秒'
+			'31536000'=>'年',
+			'2592000'=>'个月',
+			'604800'=>'周',
+			'86400'=>'天',
+			'3600'=>'小时',
+			'60'=>'分钟',
+			'1'=>'秒'
 		);
 		foreach ($f as $k=>$v)    {
 			if (0 !=$c=floor($t/(int)$k)) {
@@ -57,7 +57,7 @@ class UtilTool{
 	
 	
 	//对emoji表情转义
-	function emoji_encode($str){
+	static function emoji_encode($str){
 	    $strEncode = '';
 
 	    $length = mb_strlen($str,'utf-8');
@@ -70,16 +70,14 @@ class UtilTool{
 		    $strEncode .= $_tmpStr;
 		}
 	    }
-
 	    return $strEncode;
 	}
 
 	//对emoji表情转反义
-	function emoji_decode($str){
+	static function emoji_decode($str){
 	    $strDecode = preg_replace_callback('|\[\[EMOJI:(.*?)\]\]|', function($matches){
 		return rawurldecode($matches[1]);
 	    }, $str);
-
 	    return $strDecode;
 	}
 }
