@@ -28,7 +28,40 @@ class UtilTool{
 		}
 	}
 	
-	
+	/**
+ * 格式化时间字符串 [标准时间|时间戳=>文字时间]
+ * 一分钟内=>刚刚
+ * 一小时内=>n分钟前
+ * 大于一小时且在当天=>H:i
+ * 昨天=>昨天H:i
+ * 大于昨天但=>m月d日
+ * @param  [type] $stamp 时间戳（秒）|时间字符串
+ * @return [type]        [description]
+ */
+function format_timestamp($stamp)
+{
+    $time   = empty($stamp)?time():(is_numeric($stamp)?intval($stamp):strtotime($stamp));
+    $mix    = abs(time() - $stamp);
+    $today  = strtotime(date("Y-m-d 00:00:00", time()));
+    $lastday = $today - (24*60*60);
+    if ($time > $today) {
+        if ( $mix <= 60) {
+            return '刚刚';
+        }elseif ( $mix <= 60*60 ) {
+            return intval($mix/60)."分钟前";
+        }elseif( $mix > 60*60 ){
+            return date("H:i", $time);
+        }
+    }elseif ( $time < $lastday ) {
+    	echo "n:$mix\n";
+        return date("m月d日", $time);
+    }elseif ( $time < $today) {
+    	echo "z:$mix\n";
+        return date("昨天H:i", $time);
+    }
+    return "刚刚";
+}
+
 	
 	/**
 	 * 将含有制表符的字段打断并根据逻辑组合成指定的搜索条件语句
