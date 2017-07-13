@@ -6,9 +6,10 @@
 ## 个人杂谈
 
 ### 前端
-- Token.php
 
 ### 后端
+- Token.php
+
 ### 设计
 - 数据状态机设计.md
 
@@ -37,8 +38,6 @@
 - jquery.min.js -v1.11.1
 
 ### 后端
-#### php
-- Token.php
 - Discuz中经典加密解密算法.php
 
 #### python

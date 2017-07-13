@@ -1,26 +1,26 @@
 <?php
+/*
+---------------------------------------
 
-
-/**
-*
-*/
-class Exceptions extends exception
-{
-    public $code_err_match = [
-        200 => '',
-        204 => ''
-    ];
-
-    function __construct( $msg, $code, $level = 1)
-    {
-
+使用方法：
+//初始化对象
+$Token = new Token(124, false, "JWT");
+//获取token值
+$token = $Token->fetchToken();
+//判断token是否有效
+if($Token->checkToken($token)) {
+    //判断token是否过期
+    if(!Token->checkExpire()){
+        //过期token重新获取
+        $token = $Token->fetchToken();
     }
 }
 
+---------------------------------------
+ */
 
-/**
-*
-*/
+namespace \LDB\Token;
+
 class Token
 {
     private $salt = '1N7c8b6L8m'; //你吃饱了么?
@@ -128,18 +128,17 @@ class Token
         //比较签名和相关信息
         if ($signature == $this->signature) {
             //签名匹配，检查参数是否过期或无效
-            $this->flag = true;
+            $this->flag = TRUE;
+        }else{
+            $this->flag = FALSE;
         }
-        $this->flag = false;
-        return $this;
+        return $this->flag;
     }
 
     public function checkExpire()
     {
         if ($this->flag && $this->payload['exp'] > time()) {
             return TRUE;
-        }elseif (!$this->flag) {
-            return FALSE;
         }else{
             //过期后重新授权续 +1s
             $this->payload['exp'] = $this->getExpire();
@@ -147,17 +146,4 @@ class Token
         }
     }
 
-}
-
-
-
-$Token = new Token(124, false, "JWT");
-$token = $Token->fetchToken();
-echo "token:$token\n";
-sleep(64);
-//判断是否有效
-if(!$Token->checkToken($token)->checkExpire()) {
-    $token = $Token->fetchToken();
-    echo "token:$token\n";
-    echo "is expire".$Token->checkToken($token)->checkExpire();
 }
