@@ -125,9 +125,6 @@ class Token
         if(!$this->signature_flag || !$this->expire_flag) {
             //签名不通过或有效期超时
             return throw new Exception("token failed!", 123);
-        }elseif ($this->signature_flag && $this->expire_flag) {
-            //签名和有效期都通过
-            return self::$token;
         }elseif (!isset(self::$token)){
            $this->createToken();
         }
