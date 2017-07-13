@@ -167,18 +167,20 @@ class Token
         //根据传入字符串生成签名
         $this->getSignature();
         //比较签名和相关信息
-        $flag = $this->signature_flag;
         if ($signature == $this->signature) {
             //签名匹配，检查参数是否过期或无效
-            $flag = TRUE;
+            $this->signature_flag = TRUE;
+            $this->checkExpire();
         }else{
-            $flag = FALSE;
+            $this->signature_flag = FALSE;
         }
-        $this->signature_flag = $flag;
-        $this->checkExpire();
         return [$this->signature_flag, $this->expire_flag];
     }
 
+    /**
+     * 检查过期时间是否过期
+     * @return [type] [description]
+     */
     private function checkExpire()
     {
         $flag = $this->expire_flag;
