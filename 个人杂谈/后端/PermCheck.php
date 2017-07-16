@@ -100,8 +100,7 @@ class PremCheck
      */
     public function getPermissionVal(array $perms = [], int &$perm = 0)
     {
-        $perm = $this->PermissonVal;
-
+        $perm = 0;
         $tempTable = [];
         foreach ($perms as $key => $value) {
             if (isset($this->MappingTable[$key])) {
