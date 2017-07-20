@@ -9,6 +9,7 @@
 
 ### 后端
 - Token.php
+- PermCheck.php&config.php
 
 ### 设计
 - 数据状态机设计.md

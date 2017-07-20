@@ -70,7 +70,7 @@ class PremCheck
         if (empty($tag) && isset(self::$Permissons[$tag])) {
             return self::$Permissons[$tag];
         }else{
-            throw new Exceptions('', 123);
+            return self::$Permissons;
         }
     }
 
@@ -139,55 +139,72 @@ class PremCheck
 * 使用方法
 * 初始化对象，可使用配置项
 *     位数为非固定值，可根据自身情况按需配置，建议写人配置文件
-*
-*
-    $config = [
-        'P_NS_SA1' =>'PERM0' ,
-        'P_NS_SA2' =>'PERM1' ,
-        'P_NS_SA3' =>'PERM2' ,
-        'P_NS_SA4' =>'PERM3' ,
-        'P_NS_SA5' =>'PERM4' ,
-        'P_NS_SA6' =>'PERM5' ,
-        'P_NS_SA7' =>'PERM6' ,
-        'P_NS_SA8' =>'PERM7' ,
-        'P_NS_SA9' =>'PERM8' ,
-        'P_NS_SA10' =>'PERM9' ,
-        'P_NS_SA11' =>'PERM10',
-        'P_NS_SA12' =>'PERM11',
-        'P_NS_SA13' =>'PERM12',
-        'P_NS_SA14' =>'PERM13',
-        'P_NS_SA15' =>'PERM14',
-        'P_NS_SA16' =>'PERM15',
-        'P_NS_SA17' =>'PERM16',
-        'P_NS_SA18' =>'PERM17',
-        'P_NS_SA19' =>'PERM18',
-        'P_NS_SA20' =>'PERM19',
-    ];
-*
-*   初始化，设置别名，该对象将被保存到静态数据中，可通过别名直接访问
-*   PremCheck::getPCObjByTag(tag)
-*
-    $Perm = new PremCheck([], 'les', $config);
-    $p = 0;
-*
-*   $p为返回值，已引用方式传递，
-*
-    $perms = [
-        'P_NS_SA1' => true,
-        'P_NS_SA2' => false,
-        'P_NS_SA5' => true,
-        'P_NS_SA6' => true,
-    ];
 
-*
-*   获取权限值
-*
-    $Perm->getPermissionVal($perms , $p);
-    echo "perm val is: '0b",decbin($p),"'\n";
+  $config = [
+      'P_NS_SA1' =>'PERM0' ,
+      'P_NS_SA2' =>'PERM1' ,
+      'P_NS_SA3' =>'PERM2' ,
+      'P_NS_SA4' =>'PERM3' ,
+      'P_NS_SA5' =>'PERM4' ,
+      'P_NS_SA6' =>'PERM5' ,
+      'P_NS_SA7' =>'PERM6' ,
+      'P_NS_SA8' =>'PERM7' ,
+      'P_NS_SA9' =>'PERM8' ,
+      'P_NS_SA10' =>'PERM9' ,
+      'P_NS_SA11' =>'PERM10',
+      'P_NS_SA12' =>'PERM11',
+      'P_NS_SA13' =>'PERM12',
+      'P_NS_SA14' =>'PERM13',
+      'P_NS_SA15' =>'PERM14',
+      'P_NS_SA16' =>'PERM15',
+      'P_NS_SA17' =>'PERM16',
+      'P_NS_SA18' =>'PERM17',
+      'P_NS_SA19' =>'PERM18',
+      'P_NS_SA20' =>'PERM19',
+  ];
 
-    var_dump(PremCheck::$PERM_LIST);
+  //初始化，设置别名，该对象将被保存到静态数据中，可通过别名直接访问
+  // PremCheck::getPCObjByTag(tag)
 
-    var_dump(PremCheck::setPermissonValByPerm($p+1024, 'les'));
+  $Perm = new PremCheck([], 'les', $config);
+  $p = 0;
 
-*
+ // $p为返回值，已引用方式传递，
+
+  $perms = [
+      'P_NS_SA5' => true,
+      'P_NS_SA6' => true,
+  ];
+
+
+  //获取权限值
+
+  $Perm->getPermissionVal($perms , $p);
+  echo "perm val is: '0b",decbin($p),"'\n";
+
+  var_dump(PremCheck::$PERM_LIST);
+
+  var_dump(PremCheck::setPermissonValByPerm($p+1024, 'les'));
+
+
+
+  $Perm = new PremCheck([], 'les1', $config);
+  $p = 0;
+  $perms = [
+      'P_NS_SA1' => true,
+      'P_NS_SA2' => false,
+      'P_NS_SA5' => true,
+      'P_NS_SA6' => true,
+  ];
+
+
+  //获取权限值
+
+  $Perm->getPermissionVal($perms , $p);
+  echo "perm val is: '0b",decbin($p),"'\n";
+
+
+  var_dump(PremCheck::getPCObjByTag());
+
+
 */
