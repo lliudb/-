@@ -7,7 +7,7 @@
 /**
 *
 */
-class PremCheck
+class PermCheck
 {
     //权限对象列表
     static private $Permissons = [];
@@ -164,9 +164,9 @@ class PremCheck
   ];
 
   //初始化，设置别名，该对象将被保存到静态数据中，可通过别名直接访问
-  // PremCheck::getPCObjByTag(tag)
+  // PermCheck::getPCObjByTag(tag)
 
-  $Perm = new PremCheck([], 'les', $config);
+  $Perm = new PermCheck([], 'les', $config);
   $p = 0;
 
  // $p为返回值，已引用方式传递，
@@ -182,13 +182,13 @@ class PremCheck
   $Perm->getPermissionVal($perms , $p);
   echo "perm val is: '0b",decbin($p),"'\n";
 
-  var_dump(PremCheck::$PERM_LIST);
+  var_dump(PermCheck::$PERM_LIST);
 
-  var_dump(PremCheck::setPermissonValByPerm($p+1024, 'les'));
+  var_dump(PermCheck::setPermissonValByPerm($p+1024, 'les'));
 
 
 
-  $Perm = new PremCheck([], 'les1', $config);
+  $Perm = new PermCheck([], 'les1', $config);
   $p = 0;
   $perms = [
       'P_NS_SA1' => true,
@@ -204,7 +204,7 @@ class PremCheck
   echo "perm val is: '0b",decbin($p),"'\n";
 
 
-  var_dump(PremCheck::getPCObjByTag());
+  var_dump(PermCheck::getPCObjByTag());
 
 
 */
