@@ -11,15 +11,7 @@ class PermCheck
 {
     //权限对象列表
     static private $Permissons = [];
-
-    private $PermissonVal = 0;
-    private $PermissonTag = '';
-    private $MappingTable = [];
-    private $PermListVal  = [];
-
-    //这两个
-    private $MappingPermList  = [];
-    static public $PERM_LIST = [
+    static public  $PERM_LIST = [
         'PERM0' => 1,
         'PERM1' => 2,
         'PERM2' => 4,
@@ -42,6 +34,15 @@ class PermCheck
         'PERM19' => 524288,
         // 'PERM20' => 1048576,
     ];
+
+    private $PermissonVal = 0;
+    private $PermissonTag = '';
+    private $MappingTable = [];
+    private $PermListVal  = [];
+
+    //这两个
+    private $MappingPermList  = [];
+
 
     /**
      * 根据权限配置项初始化权限值，默认为0，全关闭
@@ -116,7 +117,6 @@ class PermCheck
                 }
             }
             $permVal_bak = 0;
-            var_dump($perms);
             if (!empty($perms)) {
                 $obj->getPermissionVal($perms, $permVal_bak);
                 if ($permVal_bak == $permVal) {
@@ -139,72 +139,69 @@ class PermCheck
 * 使用方法
 * 初始化对象，可使用配置项
 *     位数为非固定值，可根据自身情况按需配置，建议写人配置文件
-
-  $config = [
-      'P_NS_SA1' =>'PERM0' ,
-      'P_NS_SA2' =>'PERM1' ,
-      'P_NS_SA3' =>'PERM2' ,
-      'P_NS_SA4' =>'PERM3' ,
-      'P_NS_SA5' =>'PERM4' ,
-      'P_NS_SA6' =>'PERM5' ,
-      'P_NS_SA7' =>'PERM6' ,
-      'P_NS_SA8' =>'PERM7' ,
-      'P_NS_SA9' =>'PERM8' ,
-      'P_NS_SA10' =>'PERM9' ,
-      'P_NS_SA11' =>'PERM10',
-      'P_NS_SA12' =>'PERM11',
-      'P_NS_SA13' =>'PERM12',
-      'P_NS_SA14' =>'PERM13',
-      'P_NS_SA15' =>'PERM14',
-      'P_NS_SA16' =>'PERM15',
-      'P_NS_SA17' =>'PERM16',
-      'P_NS_SA18' =>'PERM17',
-      'P_NS_SA19' =>'PERM18',
-      'P_NS_SA20' =>'PERM19',
-  ];
-
-  //初始化，设置别名，该对象将被保存到静态数据中，可通过别名直接访问
-  // PermCheck::getPCObjByTag(tag)
-
-  $Perm = new PermCheck([], 'les', $config);
-  $p = 0;
-
- // $p为返回值，已引用方式传递，
-
-  $perms = [
-      'P_NS_SA5' => true,
-      'P_NS_SA6' => true,
-  ];
-
-
-  //获取权限值
-
-  $Perm->getPermissionVal($perms , $p);
-  echo "perm val is: '0b",decbin($p),"'\n";
-
-  var_dump(PermCheck::$PERM_LIST);
-
-  var_dump(PermCheck::setPermissonValByPerm($p+1024, 'les'));
-
-
-
-  $Perm = new PermCheck([], 'les1', $config);
-  $p = 0;
-  $perms = [
-      'P_NS_SA1' => true,
-      'P_NS_SA2' => false,
-      'P_NS_SA5' => true,
-      'P_NS_SA6' => true,
-  ];
-
-
-  //获取权限值
-
-  $Perm->getPermissionVal($perms , $p);
-  echo "perm val is: '0b",decbin($p),"'\n";
-
-
-  var_dump(PermCheck::getPCObjByTag());
-
-
 */
+    $config = [
+        'P_NS_SA1'  => 'PERM0' ,
+        'P_NS_SA2'  => 'PERM1' ,
+        'P_NS_SA3'  => 'PERM2' ,
+        'P_NS_SA4'  => 'PERM3' ,
+        'P_NS_SA5'  => 'PERM4' ,
+        'P_NS_SA6'  => 'PERM5' ,
+        'P_NS_SA7'  => 'PERM6' ,
+        'P_NS_SA8'  => 'PERM7' ,
+        'P_NS_SA9'  => 'PERM8' ,
+        'P_NS_SA10' => 'PERM9' ,
+        'P_NS_SA11' => 'PERM10',
+        'P_NS_SA12' => 'PERM11',
+        'P_NS_SA13' => 'PERM12',
+        'P_NS_SA14' => 'PERM13',
+        'P_NS_SA15' => 'PERM14',
+        'P_NS_SA16' => 'PERM15',
+        'P_NS_SA17' => 'PERM16',
+        'P_NS_SA18' => 'PERM17',
+        'P_NS_SA19' => 'PERM18',
+        'P_NS_SA20' => 'PERM19',
+    ];
+
+    //初始化，设置别名，该对象将被保存到静态数据中，可通过别名直接访问
+    // PermCheck::getPCObjByTag(tag)
+
+    $Perm = new PermCheck([], 'les', $config);
+    $p = 0;
+
+    // $p为返回值，已引用方式传递，
+
+    $perms = [
+        'P_NS_SA5' => true,
+        'P_NS_SA6' => true,
+    ];
+
+
+    //获取权限值
+
+    $Perm->getPermissionVal($perms , $p);
+    echo "perm val is: '0b",decbin($p),"'\n";
+
+    var_dump(PermCheck::$PERM_LIST);
+
+    var_dump(PermCheck::setPermissonValByPerm($p+1024, 'les'));
+
+
+
+    $Perm = new PermCheck([], 'les1', $config);
+    $p = 0;
+    $perms = [
+        'P_NS_SA1' => true,
+        'P_NS_SA2' => false,
+        'P_NS_SA5' => true,
+        'P_NS_SA6' => true,
+    ];
+
+
+    //获取权限值
+
+    $Perm->getPermissionVal($perms , $p);
+    echo "perm val is: '0b",decbin($p),"'\n";
+
+
+    var_dump(PermCheck::getPCObjByTag());

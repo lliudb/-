@@ -27,11 +27,11 @@ namespace \LDB\Token;
 
 class Token
 {
+    //盐:你吃饱了么?
+    private $salt = '1N7c8b6L8m';
     //是否尽心Redis操作,默认关闭
     static private $SWITCH_REDIS = false;
     static private $EXPIRE;
-    //盐:你吃饱了么?
-    private $salt = '1N7c8b6L8m';
     private $signature_flag = false;
     private $expire_flag    = false;
     //对象存储值
