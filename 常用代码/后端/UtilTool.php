@@ -57,11 +57,11 @@ class UtilTool{
         foreach ($words as $key=>$value) {
         if (!empty($value)) {
             if ($key == 0) {
-            $preg .= " ".$field." like '%".$value."%' ";
+            $preg .= "{$field} like '%{$value}%' ";
             }elseif ($key >= $max) {//zh
             break;
             }else{
-            $preg .= " ".$logic." ".$field." like '%".$value."%' ";
+            $preg .= " {$logic} {$field} like '%{$value}%' ";
             }
         }
         }
