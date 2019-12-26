@@ -68,5 +68,67 @@ class UtilTool{
         return $preg;
     }
 
- 
+    /**
+    * 格式化数量
+    */
+    function formatLikeNum($like = 0)
+    {
+        if ($like < 1000) {
+            return "$like";
+        }
+        $cell = ['K' => 3,'M' => 6,'B' => 9,'G' => 12];
+        foreach ($cell as $key => $value) {
+            $new_num = $like / pow(10, $value);
+            if ($new_num < 10) {
+                return number_format($new_num, 2) . $key;
+            } else if ($new_num < 100) {
+                return number_format($new_num, 1) . $key;
+            } else if ($new_num < 1000) {
+                return floor($new_num) . $key;
+            }
+        }
+        return "$like";
+    }
+
+    function getLevel($exp)
+    {
+        $exp = intval($exp);
+        if ($exp <= 0) return 1;
+
+        $levels = [
+            0, 10, 20, 50, 100, 200, 500, 800, 1500, 2000, 3000, 5000, 10000, 18000, 30000, 60000, 100000, 180000, 300000, 600000
+        ];
+
+        foreach ($levels as $key => $level) {
+            if ($exp < $level) return $key;
+        }
+        return count($levels);
+    }
+    
+    
+    function checkStrLimit(
+        $str = '',
+        $limit = 16,
+        $exclude_emoji = FALSE
+    )
+    {
+        if ($exclude_emoji) {
+            if(preg_match("/(\\\u[ed][0-9a-f]{3})/i", json_encode($str))) {
+                return FALSE;
+            }
+        }
+        $len = 0;
+        for($i = 0; $i < mb_strlen($str); $i++) {
+            $item = mb_substr($str, $i, 1);
+            if(strlen($item) >= 3) {
+                $len += 2;
+            } else {
+                $len++;
+            }
+        }
+        if ($len > $limit) {
+            return FALSE;
+        }
+        return TRUE;
+    }
 }
